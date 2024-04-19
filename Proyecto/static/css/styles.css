@@ -1,0 +1,79 @@
+*{
+    box-sizing: border-box;
+    font-family: cursive;
+}
+
+body{
+    background-color: lightseagreen;
+}
+
+.music{
+    position: absolute;
+    height: 350px;
+    border-radius: 20px;
+}
+
+.box-img{
+    position: relative;
+    width: 21.7em;
+    height: 26.5em;
+}
+
+.box-img .img{
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.play{
+    width: 100%;
+    outline: none;
+}
+
+.texto{
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.container{
+    max-width: 1440px;
+}
+
+.titulo{
+    font-size: 6em;
+    text-align: center;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: bisque; /* Color de fondo del footer */
+    padding: 10px; /* Espaciado interior del footer */
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para separar del contenido */
+}
+
+footer, #reproductor {
+    width: 100%;
+}
+
+.centered-text {
+    position: relative;
+    height: 100px; /* Ajusta la altura según sea necesario */
+    line-height: 100px; /* Ajusta la altura según sea necesario */
+    text-align: center; /* Centrar horizontalmente el texto */
+}
+
+.audio-container {
+    display: table;
+    width: 100%;
+    height: 75px; /* Ajusta la altura según sea necesario */
+    text-align: center; /* Centrar horizontalmente el contenido */
+}
+
+#audio-container > audio::-webkit-media-controls {
+    background-color: #ff0000; /* Cambia el color de la barra de tiempo */
+}
+
