@@ -1,0 +1,93 @@
+/* Importa la fuente de Google Fonts */
+@import url('https://www.dafont.com/es/theme.php?cat=402');
+
+/* Aplica la fuente descargada a todos los elementos */
+* {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Demi'; /* Reemplaza "Open Sans" con el nombre de la fuente que descargaste */
+}
+
+
+body {
+    background-image: url('/media/imagenes/black.jpg'); /* URL de tu imagen o GIF animado */
+    background-size: cover; /* Ajustar el tamaño de la imagen para cubrir todo el fondo */
+    background-position: center; /* Centrar la imagen en el fondo */
+    background-repeat: no-repeat; /* Evitar que la imagen se repita */
+    background-color: rgb(0, 0, 0); /* Color de fondo de respaldo */
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: bisque; /* Color de fondo del footer */
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para separar del contenido */
+}
+
+.navbar-custom {
+    margin-bottom: 50px;
+    background-color: rgba(255, 255, 255, 0); /* Color de fondo con transparencia */
+    
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+}
+.navbar-custom {
+    justify-content: space-between; /* Alinea los elementos de la barra de navegación para que estén espaciados uniformemente */
+}
+
+.navbar-brand {
+    margin-right: auto; /* Mueve el título del navbar a la izquierda */
+}
+
+.navbar-nav {
+    margin-left: auto; /* Mueve los enlaces del navbar a la derecha */
+}
+
+.navbar-custom .navbar-brand {
+    padding-right: 50px; /* Añade espacio a la derecha del título del navbar */
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    padding-left: 50px; /* Añade espacio a la izquierda de cada enlace del navbar */
+}
+
+
+.mi-footer{
+    background-color: #000000;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.514); 
+    margin-top: 40px;
+    color: #ffffff;
+    
+}
+
+.formulario{
+    max-width: 1440px;
+    color: white; /* Cambiar color del texto a blanco */
+    width: 50%; /* Ancho del contenedor */
+    margin: 0 auto; /* Margen automático para centrarlo horizontalmente */
+    text-align: center; /* Alineación de contenido centrado */
+}
+.formulario h2 {
+    margin-bottom: 20px; /* Margen inferior para separar el título del formulario */
+    font-size: 50px;
+}
+.formulario form {
+    margin-top: 20px; /* Margen superior para separar el formulario del título */
+}
+.formulario form button {
+    margin-top: 20px; /* Margen superior para separar el botón del formulario */
+    background-color: grey; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno */
+    font-size: 16px; /* Tamaño de fuente */
+    border-radius: 5px; /* Borde redondeado */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color de fondo */
+}
+.container form button:hover {
+    background-color: wheat; /* Cambio de color de fondo al pasar el mouse */
+}
