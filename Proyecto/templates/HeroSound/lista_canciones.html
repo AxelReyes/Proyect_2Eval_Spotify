@@ -20,7 +20,7 @@
            
             
             <div class="navbar-brand-container">
-                <a class="navbar-brand" href="#">Hero Sounds</a>
+                <a class="navbar-brand" href=" ">Hero Sounds</a>
             </div>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,17 +29,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Tu Musica</a>
+                        <a class="nav-link active" aria-current="page" href="/HeroSound/canciones/">Tu Musica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Agregar Musica</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mostrar Musica</a>
+                        <a class="nav-link" href="/HeroSound/cargar_music/">Agregar Musica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Lista</a>
+                        <a class="nav-link " href="/HeroSound/base_canciones/" tabindex="-1" aria-disabled="true">Lista</a>
                     </li>
                 </ul>
             </div>
@@ -47,7 +43,7 @@
     </nav>
     
     <div class="titulo">
-        <h1>H e ro S o u n d </h1>
+        <h1>H e r o S o u n d </h1>
         <h3>Tu Musica</h3>
     </div>
     <br><br>
@@ -70,7 +66,7 @@
                         style="position: absolute; bottom: 0; right: 0;">
                         <img src="{% static 'images/pla6.png' %}" alt="Play" width="70px">
                     </a>
-
+                
                 </div>
             </div>
             {% if forloop.counter|divisibleby:4 %}

@@ -1,19 +1,17 @@
-/* Importa la fuente de Google Fonts */
-@import url('https://www.dafont.com/es/theme.php?cat=402');
 
-/* Aplica la fuente descargada a todos los elementos */
 * {
     box-sizing: border-box;
-    font-family: 'Franklin Gothic Demi'; /* Reemplaza "Open Sans" con el nombre de la fuente que descargaste */
+    font-family: 'Franklin Gothic Demi'; 
 }
 
 
 body {
-    background-image: url('/media/imagenes/black.jpg'); /* URL de tu imagen o GIF animado */
-    background-size: cover; /* Ajustar el tamaño de la imagen para cubrir todo el fondo */
-    background-position: center; /* Centrar la imagen en el fondo */
-    background-repeat: no-repeat; /* Evitar que la imagen se repita */
-    background-color: rgb(0, 0, 0); /* Color de fondo de respaldo */
+    background-image: url('/media/imagenes/black.jpg'); 
+    /* https://i.gifer.com/origin/65/65c6ed96a40bf5e00d4ac5a7a36845da_w200.gif */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-color: rgb(0, 0, 0); 
 }
 
 .music{
@@ -26,6 +24,7 @@ body {
     position: relative;
     width: 21.7em;
     height: 26.5em;
+    
 }
 
 .box-img .img{
@@ -47,7 +46,8 @@ body {
 .texto{
     font-size: 1.1em;
     text-align: center;
-    
+    color: #ffffff;
+   
 }
 
 .container{
@@ -64,9 +64,9 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-    background-color: bisque; /* Color de fondo del footer */
-    padding: 10px; /* Espaciado interior del footer */
-    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para separar del contenido */
+    background-color: bisque; 
+    padding: 10px; 
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 footer, #reproductor {
@@ -75,29 +75,29 @@ footer, #reproductor {
 
 .centered-text {
     position: relative;
-    height: 100px; /* Ajusta la altura según sea necesario */
-    line-height: 100px; /* Ajusta la altura según sea necesario */
-    text-align: center; /* Centrar horizontalmente el texto */
+    height: 100px; 
+    line-height: 100px; 
+    text-align: center; 
 }
 
 .audio-container {
     display: table;
     width: 100%;
-    height: 75px; /* Ajusta la altura según sea necesario */
-    text-align: center; /* Centrar horizontalmente el contenido */
+    height: 75px; 
+    text-align: center; 
 }
 
 #audio-container > audio::-webkit-media-controls {
-    background-color: #ff0000; /* Cambia el color de la barra de tiempo */
+    background-color: #ff0000; 
 }
 
 #info-cancion {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: #00000091; /* Cambia esto al color de fondo que desees */
-    color: white; /* Cambiar color del texto a blanco */
-    font-size: 20px; /* Aumentar tamaño de letra */
+    background-color: #00000091; 
+    color: white; 
+    font-size: 20px; 
     
 
 }
@@ -107,7 +107,7 @@ footer, #reproductor {
 }
 .navbar-custom {
     margin-bottom: 50px;
-    background-color: rgba(255, 255, 255, 0); /* Color de fondo con transparencia */
+    background-color: rgba(255, 255, 255, 0); 
     
 }
 
@@ -116,23 +116,23 @@ footer, #reproductor {
     color: white;
 }
 .navbar-custom {
-    justify-content: space-between; /* Alinea los elementos de la barra de navegación para que estén espaciados uniformemente */
+    justify-content: space-between; 
 }
 
 .navbar-brand {
-    margin-right: auto; /* Mueve el título del navbar a la izquierda */
+    margin-right: auto; 
 }
 
 .navbar-nav {
-    margin-left: auto; /* Mueve los enlaces del navbar a la derecha */
+    margin-left: auto; 
 }
 
 .navbar-custom .navbar-brand {
-    padding-right: 50px; /* Añade espacio a la derecha del título del navbar */
+    padding-right: 50px; 
 }
 
 .navbar-custom .navbar-nav .nav-link {
-    padding-left: 50px; /* Añade espacio a la izquierda de cada enlace del navbar */
+    padding-left: 50px; 
 }
 
 
@@ -143,4 +143,30 @@ footer, #reproductor {
     margin-top: 40px;
     color: #ffffff;
     
+}
+
+.container {
+    color: #ffffff;
+}
+
+.table {
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.514); 
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+.table th, .table td {
+    padding: 8px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.img {
+    border-radius: 10%;
 }
