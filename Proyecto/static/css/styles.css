@@ -76,7 +76,7 @@ footer, #reproductor {
 .centered-text {
     position: relative;
     height: 100px; 
-    line-height: 100px; 
+    line-height: 48px; 
     text-align: center; 
 }
 

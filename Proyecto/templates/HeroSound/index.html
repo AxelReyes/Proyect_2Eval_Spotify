@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/HeroSound/canciones/">Tu Musica</a>
+                        <a class="nav-link active" aria-current="page" href="/">Tu Musica</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/HeroSound/cargar_music/">Agregar Musica</a>
@@ -42,7 +42,49 @@
         </div>
     </nav>
     
-
+    <div class="titulo">
+        <h1>H e r o S o u n d </h1>
+        <h3>Tu Musica</h3>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            {% with col_class="col-3" %}
+            {% for cancion in canciones %}
+            <div class="{{ col_class }}">
+                <div class="box-img" style="position: relative;">
+                    <div class="texto">
+                        <!-- Titulo -->
+                        {{ cancion.titulo }} <br>
+                        <!-- Artista -->
+                        {{ cancion.artista }}
+                    </div>
+                    <br>
+                    <img class="img" src="{{ cancion.imagen.url }}" alt="imagen" width="330px">
+                    <a href="#"
+                        onclick="reproducir('{{ cancion.archivo_mp3.url }}', '{{ cancion.titulo }}', '{{ cancion.artista }}', '{{ cancion.imagen.url }}')"
+                        style="position: absolute; bottom: 0; right: 0;">
+                        <img src="{% static 'images/pla6.png' %}" alt="Play" width="70px">
+                    </a>
+                
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:4 %}
+            {% if col_class == "col-3" %}
+            {% with col_class="col-6" %}
+            {% endwith %}
+            {% elif col_class == "col-6" %}
+            {% with col_class="col-9" %}
+            {% endwith %}
+            {% else %}
+            {% with col_class="col-3" %}
+            {% endwith %}
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
 
     <footer class="mi-footer">
     <div class="container py-5"> <!-- Cambiamos py-4 por py-5 para aumentar la altura -->
@@ -75,7 +117,52 @@
     
 </footer>
 
-  
+
+
+    
+    
+<footer id="info-cancion" class="d-flex align-content-center flex-column footer-with-shadow">
+    <div class="row">
+        <div id="imagen" class=" img1 col-1"></div>
+        <div id="nombre-artista-cancion" class="col-4 centered-text">Reproduciondo... </div>
+        <div class="col-7">
+            <audio id="reproductor" controls class="audio-container"></audio>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    var reproductor = document.getElementById('reproductor');
+
+    function reproducir(url, nombreCancion, artista, imagenUrl) {
+        // Detener la canción actual si está reproduciendo
+        reproductor.pause();
+        reproductor.currentTime = 0;
+
+        // Cargar y reproducir la nueva canción
+        reproductor.src = url;
+        reproductor.play();
+
+        // Mostrar información de la canción en el footer
+        var nombreArtistaCancionDiv = document.getElementById('nombre-artista-cancion');
+        var imagenDiv = document.getElementById('imagen'); // Definir imagenDiv
+
+        nombreArtistaCancionDiv.innerHTML = `${artista}  <br>${nombreCancion}`;
+
+        // Crear elemento img para mostrar la imagen
+        var imagenElement = document.createElement('img');
+        imagenElement.src = imagenUrl;
+        imagenElement.alt = 'Carátula de la canción';
+        imagenElement.width = 100; // ajusta el ancho según sea necesario
+        // Añadir la imagen al div de la imagen
+        imagenDiv.innerHTML = '';
+        imagenDiv.appendChild(imagenElement);
+    }
+
+</script>
 </body>
 
 </html>
