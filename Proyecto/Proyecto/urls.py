@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.views.static import serve
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.start_music, name='index'),
     path('HeroSound/',include('HeroSound.urls')),
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
     path('admin/', admin.site.urls),

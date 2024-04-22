@@ -17,7 +17,7 @@ body {
 }
 
 footer {
-    position: relative;
+    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: bisque; /* Color de fondo del footer */
@@ -63,17 +63,49 @@ footer {
     
 }
 
-.formulario{
-    max-width: 1440px;
-    color: white; /* Cambiar color del texto a blanco */
-    width: 50%; /* Ancho del contenedor */
-    margin: 0 auto; /* Margen automático para centrarlo horizontalmente */
-    text-align: center; /* Alineación de contenido centrado */
+.formulario {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .formulario h2 {
-    margin-bottom: 20px; /* Margen inferior para separar el título del formulario */
-    font-size: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
 }
+
+.formulario form {
+    text-align: center;
+}
+
+.formulario button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.formulario button:hover {
+    background-color: #0056b3;
+}
+
+.formulario input[type="text"],
+.formulario input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
 .formulario form {
     margin-top: 20px; /* Margen superior para separar el formulario del título */
 }

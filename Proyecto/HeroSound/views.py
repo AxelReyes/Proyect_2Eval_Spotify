@@ -4,17 +4,17 @@ from . import forms
 from .forms import FormularioCancion
 
 # Create your views here.
-def index(request):
-    cancionlist2 = Cancion.objects.order_by('titulo')
-    my_context = {'cancion': cancionlist2}
-    return render(request, 'HeroSound/index.html', context=my_context)
+# def index(request):
+#     cancionlist2 = Cancion.objects.order_by('titulo')
+#     my_context = {'cancion': cancionlist2}
+#     return render(request, 'HeroSound/index.html', context=my_context)
 
 
 def start_music(request):
     # Obtén todas las canciones guardadas
     canciones = Cancion.objects.all()
     
-    return render(request, 'HeroSound/lista_canciones.html', {'canciones': canciones})
+    return render(request, 'HeroSound/index.html', {'canciones': canciones})
 
 
 def cargar_music(request):
@@ -22,7 +22,7 @@ def cargar_music(request):
         formulario = FormularioCancion(request.POST, request.FILES)
         if formulario.is_valid():
             formulario.save()
-            return redirect('/HeroSound/canciones/')
+            return redirect('/')
     else:
         formulario = FormularioCancion()
     return render(request, 'HeroSound/upload_music.html', {'formulario': formulario})
