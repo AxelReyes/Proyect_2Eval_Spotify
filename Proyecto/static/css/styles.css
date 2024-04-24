@@ -91,6 +91,47 @@ footer, #reproductor {
     background-color: #ff0000; 
 }
 
+/* Seccion donde esta el buscador --------------------------------------------------------*/
+/* el conatiner es la caja donde va los resultados de las busquedas*/
+.container_buscador{
+    width: 25rem;
+    height: auto;
+    display: block;
+    background-color: white;
+    padding: 0.625rem;
+    border: 1px solid var(--color-blanco);
+    position: fixed;
+    top: 7.5%;
+    left: 0;
+    right: 0;
+    margin-left: 16.3rem;
+    border-radius: 0.625rem;
+    z-index: 9999; /* Pone el conatiner hasta arriba para que se vea glotante en la pagina */
+}
+/* La caja de container que modifica el texto */
+.container_buscador a {
+    color: var(--color-texto);
+    text-decoration: none; 
+    size: 0.75rem;
+    text-align: left; 
+  }
+
+.container_buscador ul {
+    list-style-type: none;
+    text-align: left;
+    padding: 0; 
+    margin: 0; 
+}
+  
+.container_buscador ul li {
+    padding: 0; 
+    margin: 0; 
+}
+/* Hover cuando seleccionas un resultado de la busqueda del container caja. */
+.container_buscador a:hover{
+    color: rgb(150, 150, 150);
+}
+
 #info-cancion {
     position: fixed;
     bottom: 0;
@@ -169,4 +210,10 @@ footer, #reproductor {
 
 .img {
     border-radius: 10%;
+}
+
+.titulo_tabla{
+    font-size: 5rem;
+    text-align: center;
+    color: white;
 }

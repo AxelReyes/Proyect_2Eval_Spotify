@@ -18,9 +18,18 @@
     <nav class="navbar navbar-custom navbar-expand-lg">
         <div class="container-fluid">
            
+
             <div class="navbar-brand-container">
                 <img src="{% static 'images/logo.png' %}" alt="logo" width="90rem">
                 <a class="navbar-brand" href=" ">Hero Sounds</a>
+            </div>
+    
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar"
+                    id="inputBusqueda">
+            </form>
+            <div id="resultadoBusqueda" class="container_buscador">
+                <!--Aqui se muestra el conatiner no hay que poner nada aqui :)) -->
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,30 +49,37 @@
             </div>
         </div>
     </nav>
-    
-    <h1 class="titulo_tabla">Lista de canciones</h1><br><br>
-    <div class="container">
-        {% if canciones %}
-            <table class="table">
-                <thead>
-                    <th>Portada</th>
-                    <th>Artista</th>
-                    <th>Nombre</th>
-                </thead>
-                <tbody>
-                    {% for cancion in canciones %}
-                        <tr>
-                            <td><img class="img" src="{{ cancion.imagen.url }}" alt="imagen" width="50px"></td>
-                            <td>{{cancion.artista}}</td>
-                            <td>{{cancion.titulo}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No se encontro ninguna cancion</p>
-        {% endif %}
+
+    <div class="titulo">
+        <h1>H e r o S o u n d </h1>
+        <h3>Tu Musica</h3>
     </div>
+    <br><br>
+    {% if cancion_seleccionada %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="box-img" style="position: relative;">
+                    <div class="texto">
+                        <!-- Titulo -->
+                        {{ cancion_seleccionada.titulo }} <br>
+                        <!-- Artista -->
+                        {{ cancion_seleccionada.artista }}
+                    </div>
+                    <br>
+                    <img class="img" src="{{ cancion_seleccionada.imagen.url }}" alt="imagen" width="330px">
+                    <a href="#"
+                        onclick="reproducir('{{ cancion_seleccionada.archivo_mp3.url }}', '{{ cancion_seleccionada.titulo }}', '{{ cancion_seleccionada.artista }}', '{{ cancion_seleccionada.imagen.url }}')"
+                        style="position: absolute; bottom: 0; right: 0;">
+                        <img src="{% static 'images/pla6.png' %}" alt="Play" width="70px">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>No se encontraron resultados</p>
+    {% endif %}
 
 
 
@@ -98,6 +114,18 @@
         
     </footer>
 
+    <footer id="info-cancion" class="d-flex align-content-center flex-column footer-with-shadow">
+        <div class="row">
+            <div id="imagen" class=" img1 col-1"></div>
+            <div id="nombre-artista-cancion" class="col-4 centered-text">Reproduciondo... </div>
+            <div class="col-7">
+                <audio id="reproductor" controls class="audio-container"></audio>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/btn_reproducir.js' %}"></script>
+    <script src="{% static 'js/buscador.js' %}"></script>
 </body>
 
 </html>
