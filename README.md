@@ -1,1 +1,6 @@
-# Proyect_2Eval_Spotify![Uploading Captura de pantalla 2024-04-24 142833.png…]()
+# Proyect_2Eval_Spotify
+
+WebHeros
+1- Axel Felipe Reyes Valadez
+2- Jesus Manuel Arellano Merendon
+3- Luis Daniel Delgado Enriquez
