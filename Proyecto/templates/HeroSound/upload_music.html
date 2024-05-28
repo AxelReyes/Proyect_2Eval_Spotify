@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/styles_form.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles_forms.css' %}" />
     <link rel="icon" href="{% static 'images/logo.png' %}">
     <title>Subir Canciones</title>
 </head>
@@ -40,10 +40,8 @@
                 </div>
             </div>
         </nav>
-        <br>
     <div class="formulario">
         <h2>Agregar Nueva Canción</h2>
-        <br>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ formulario.as_p }}

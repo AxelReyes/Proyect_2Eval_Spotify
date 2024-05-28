@@ -53,3 +53,25 @@ def cargar_music(request):
 def base(request):
     canciones = Cancion.objects.all()
     return render(request, 'HeroSound/base_canciones.html',{'canciones': canciones})
+
+def detalle_cancion(request):
+     # Obtén todas las canciones guardadas
+    canciones = Cancion.objects.all()
+
+    # Obtener los parámetros de la URL
+    nombre_cancion = request.GET.get('nombreCancion', '')
+    artista = request.GET.get('artista', '')
+    imagen_url = request.GET.get('imagenUrl', '')
+    audio_url = request.GET.get('audioUrl', '')
+
+    # Pasar los datos a la plantilla
+    context = {
+        'nombre_cancion': nombre_cancion,
+        'artista': artista,
+        'imagen_url': imagen_url,
+        'url': audio_url,  # Cambiar 'url' por 'audio_url'
+        'canciones' : canciones,
+    }
+
+    # Renderizar la plantilla del detalle de la canción
+    return render(request, 'HeroSound/detalle_cancion.html', context)

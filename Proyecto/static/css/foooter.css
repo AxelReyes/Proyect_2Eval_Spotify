@@ -1,0 +1,409 @@
+
+* {
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Demi'; 
+}
+
+
+body {
+    background-image: url('/media/imagenes/black.jpg'); 
+    /* https://i.gifer.com/origin/65/65c6ed96a40bf5e00d4ac5a7a36845da_w200.gif */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-color: rgb(0, 0, 0); 
+}
+
+.music{
+    position: absolute;
+    height: 350px;
+    border-radius: 20px;
+}
+
+.box-img{
+    position: relative;
+    width: 21.7em;
+    height: 26.5em;
+    
+}
+
+.box-img .img{
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.466);
+   
+
+}
+
+.play{
+    width: 100%;
+    outline: none;
+}
+
+.texto{
+    font-size: 1.1em;
+    text-align: center;
+    color: #ffffff;
+   
+}
+
+.container{
+    max-width: 1440px;
+}
+
+.titulo{
+    font-size: 6em;
+    text-align: center;
+    color: #ffffff;
+}
+
+footer {
+    position: fixed; /* Mantén el footer fijo */
+    bottom: 0;
+    width: 100%;
+    background-color: bisque; 
+    padding: 10px; 
+    z-index: 100; /* Asegura que el footer esté por encima de otros elementos */
+}
+
+footer, #reproductor {
+    width: 100%; 
+}
+
+.centered-text {
+    position: relative;
+    height: 100px; 
+    line-height: 48px; 
+    text-align: center;
+}
+
+.audio-container {
+    display: table;
+    width: 100%;
+    height: 75px; 
+    text-align: center; 
+}
+
+#audio-container > audio::-webkit-media-controls {
+    background-color: #ff0000; 
+}
+
+/* Seccion donde esta el buscador --------------------------------------------------------*/
+/* el conatiner es la caja donde va los resultados de las busquedas*/
+.container_buscador{
+    width: 25rem;
+    height: auto;
+    display: block;
+    background-color: white;
+    padding: 0.625rem;
+    border: 1px solid var(--color-blanco);
+    position: fixed;
+    top: 7.5%;
+    left: 0;
+    right: 0;
+    margin-left: 16.3rem;
+    border-radius: 0.625rem;
+    z-index: 9999; /* Pone el conatiner hasta arriba para que se vea glotante en la pagina */
+}
+/* La caja de container que modifica el texto */
+.container_buscador a {
+    color: var(--color-texto);
+    text-decoration: none; 
+    size: 0.75rem;
+    text-align: left; 
+  }
+
+.container_buscador ul {
+    list-style-type: none;
+    text-align: left;
+    padding: 0; 
+    margin: 0; 
+}
+  
+.container_buscador ul li {
+    padding: 0; 
+    margin: 0; 
+}
+/* Hover cuando seleccionas un resultado de la busqueda del container caja. */
+.container_buscador a:hover{
+    color: rgb(150, 150, 150);
+}
+
+#info-cancion {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #00000091; 
+    color: white; 
+    font-size: 20px; 
+    
+
+}
+.footer-with-shadow {
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.514); 
+    border-radius: 10px;
+}
+.navbar-custom {
+    margin-bottom: 50px;
+    background-color: rgba(255, 255, 255, 0); 
+    
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+}
+.navbar-custom {
+    justify-content: space-between; 
+}
+
+.navbar-brand {
+    margin-right: auto; 
+}
+
+.navbar-nav {
+    margin-left: auto; 
+}
+
+.navbar-custom .navbar-brand {
+    padding-right: 50px; 
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    padding-left: 50px; 
+}
+
+
+.mi-footer{
+    background-color: #000000;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.514); 
+    padding-bottom: 6.25rem;
+    margin-top: 2.5rem;
+    color: #ffffff;
+    
+}
+
+.container {
+    color: #ffffff;
+}
+
+.table {
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.514); 
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 0.625rem; 
+    overflow: hidden; 
+}
+
+.table th, .table td {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.table th {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.img {
+    border-radius: 10%;
+}
+
+.titulo_tabla{
+    font-size: 5rem;
+    text-align: center;
+    color: white;
+}
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+#play-pause {
+    width: 1.875rem;
+    height: 1.875rem;
+    background: url('../images/play2.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px; /* Espacio entre el botón y la barra de progreso */
+}
+
+#play-pause.pause {
+    background: url('../images/pausa.png') no-repeat center center;
+    background-size: contain;
+}
+
+.seek-container {
+    display: flex;
+    align-items: center;
+    width: 90%; /* Asegúrate de que la barra de búsqueda ocupe todo el ancho del contenedor */
+}
+
+#seek-bar {
+    flex: 1;
+    margin: 0 10px; /* Añade espacio entre los tiempos y la barra de búsqueda */
+}
+
+#current-time, #duration-time {
+    color: white; /* Ajusta según el diseño deseado */
+}
+
+.volumen-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#volumen-bar {
+    width: 6.25rem; /* Adjust width as needed */
+    -webkit-appearance: none;
+    background: #ddd;
+    height: 0.5rem;
+    border-radius: 0.313rem;
+    outline: none;
+}
+
+#volumen-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#volumen-bar::-moz-range-thumb {
+    width: 1rem;
+    height: 1rem;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#volumen-icon {
+    width: 1.875rem;
+    height: 1.875rem;
+    background: url('../images/volumen.png') no-repeat center center; /* Cambia 'volumen.png' por la ruta de tu imagen */
+    background-size: contain;
+}
+
+#contraer {
+    width: 1.875rem;
+    height: 1.875rem;
+    background: url('../images/contraer.png') no-repeat center center; /* Cambia 'volumen.png' por la ruta de tu imagen */
+    background-size: contain;
+}
+
+.col-7-f {
+    width: 57%;
+}
+
+.col-2-f {
+    width: 9%;
+}
+
+.col-2-h {
+    width: 13%;
+}
+
+.col-3-f {
+    width: 23%;
+}
+
+.col-2-h-r {
+    width: 4%;
+}
+
+.col-4-h{
+    width: 56%;
+}
+
+.col-5-h{
+    width: 28%;
+}
+
+.img1 {
+    border-radius: 10%;
+    width: 32rem;
+}
+
+.box-img2 {
+    position: fixed;
+    top: 10%; /* Ajusta según tu preferencia */
+    left: 15rem;
+    border-radius: 10px;
+}
+
+.texto2{
+    text-align: center;
+}
+
+.box-img3{
+    position: relative;
+    width: 8rem;
+    margin-left: 20rem;
+}
+
+.img2 {
+    border-radius: 10%;
+    width: 8rem;
+}
+
+/* ffffff */
+.col-auto {
+    flex: 0 0 auto;
+}
+
+.col {
+    flex: 1 1 auto;
+}
+
+.col-8{
+    margin-top: 0.8rem;
+}
+
+.col-4{
+    margin-top: 0.8rem;
+}
+
+.box-img4 {
+    width: auto; /* Ajusta según tus necesidades */
+    position: relative;
+    margin-left: 14rem;
+}
+
+.texto1 {
+    text-align: center; /* Puedes ajustar esto a 'left' o 'right' si prefieres otro alineamiento */
+}
+
+
+/* Estilos para el botón sobre la imagen */
+#imagen {
+    position: relative;
+    display: inline-block;
+}
+#imagen img {
+    width: 6.5rem;
+    border-radius: 1rem;
+}
+#close-button {
+    position: absolute;
+    top: 0;
+    left: 5.5rem;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
