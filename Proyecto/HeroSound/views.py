@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from HeroSound.models import Cancion, Perfil
 from .forms import FormularioCancion, RegistroForm, CustomAuthenticationForm
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 def start_music(request):
     canciones = Cancion.objects.all()
@@ -116,3 +117,22 @@ def logout_view(request):
     if request.user.is_authenticated:
         auth_logout(request)
     return redirect('/')
+
+def editar_cancion(request, cancion_id):
+    cancion = get_object_or_404(Cancion, id=cancion_id)
+
+    if request.method == 'POST':
+        formulario = FormularioCancion(request.POST, request.FILES, instance=cancion)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(reverse('basecancion'))
+    else:
+        formulario = FormularioCancion(instance=cancion)
+
+    return render(request, 'HeroSound/editar_cancion.html', {'formulario': formulario, 'cancion': cancion})
+
+@login_required
+def eliminar_cancion(request, cancion_id):
+    cancion = get_object_or_404(Cancion, id=cancion_id)
+    cancion.delete()
+    return redirect('basecancion')

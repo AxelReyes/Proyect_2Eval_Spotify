@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/" style="padding: 0.5rem; width: 7rem;">Tu Musica</a>
                     </li>
+                    <li class="nav-item" style="margin-right: 5rem;">
+                        <a class="nav-link " href="/HeroSound/base_canciones/" tabindex="-1" aria-disabled="true">Lista</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.5rem; width: 11.5rem;">
@@ -53,9 +56,11 @@
                         <a class="nav-link" href="{% url 'logout' %}" style="padding: 0.5rem; border: none; background-color: red; color: white;">Cerrar Sesión</a>
                     </li>
                 {% else %}
+                <!--
                     <li class="nav-item">
                         <a class="nav-link" href="/HeroSound/login" style="padding: 0.5rem; border: none; background-color: blue; color: white;">Iniciar Sesion</a>
                     </li>
+                    -->
                 {% endif %}
                 </ul>
             </div>
