@@ -8,12 +8,17 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
 def start_music(request):
+    # Obtén todas las canciones guardadas
     canciones = Cancion.objects.all()
+
+    # Verifica si se está realizando una búsqueda
     if 'q' in request.GET:
         query = request.GET.get('q')
-        canciones = Cancion.objects.filter(titulo__icontains(query))
+        canciones = Cancion.objects.filter(titulo__icontains=query)
         resultados = [{'titulo': cancion.titulo, 'artista': cancion.artista} for cancion in canciones]
         return JsonResponse(resultados, safe=False)
+
+    # Si no hay búsqueda, renderiza la plantilla con todas las canciones
     return render(request, 'HeroSound/index.html', {'canciones': canciones})
 
 def busqueda(request):
@@ -59,11 +64,7 @@ def detalle_cancion(request):
 
 def show_administrador(request):
     canciones = Cancion.objects.all()
-    if 'q' in request.GET:
-        query = request.GET.get('q')
-        canciones = Cancion.objects.filter(titulo__icontains(query))
-        resultados = [{'titulo': cancion.titulo, 'artista': cancion.artista} for cancion in canciones]
-        return JsonResponse(resultados, safe=False)
+
     return render(request, 'HeroSound/administrador.html', {'canciones': canciones})
 
 
@@ -106,7 +107,7 @@ def login_view(request):
                 # Asegurarse de que el perfil exista
                 perfil, created = Perfil.objects.get_or_create(user=user, defaults={'tipo_usuario': 'user'})
                 if perfil.tipo_usuario == 'administrador':
-                    return redirect('/HeroSound/administrador')
+                    return redirect('HeroSound/administrador')
                 elif perfil.tipo_usuario == 'user':
                     return redirect('/')
     else:

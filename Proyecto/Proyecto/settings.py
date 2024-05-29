@@ -19,6 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #print(Path(__file__).resolve().parent.parent)
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+print(TEMPLATES_DIR)
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
@@ -34,8 +36,15 @@ SECRET_KEY = 'django-insecure-=k5(#_4&98zy-4=tl20jib0f*o751unrs%gi^uw6r+_@gj23=y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'miprimermusic.whiteplant-176260c4.eastus2.azurecontainerapps.io',  # Agrega tu dominio aquí
+    'localhost',  # Incluye localhost si pruebas localmente
+    '127.0.0.1'   # Incluye la IP local si pruebas localmente
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://miprimermusic.whiteplant-176260c4.eastus2.azurecontainerapps.io'
+]
 
 # Application definition
 

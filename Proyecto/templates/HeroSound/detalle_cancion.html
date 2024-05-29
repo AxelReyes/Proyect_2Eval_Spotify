@@ -15,47 +15,46 @@
     <title>HeroSound</title>
 </head>
 <body>
-<button id="contraer"></button>
-<div class="container">
-    <div class="row">
-        <div class="col-4">
-            <div class="box-img2">
-                <div class="texto1" id="nombre-artista-cancion">
-                </div>
-                <br>
-                <img id="imagen" class="img1" src="{{ imagen_url }}" alt="imagen">
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="container">
-                <div class="row align-items-center">
-                    {% for cancion in canciones %}
-                    <div class="col-4">
-                        <div class="box-img3">
-                            <img id="imagen" class="img2" src="{{ cancion.imagen.url }}" alt="imagen">         
-                            <a href="#"
-                            onclick="reproducir('{{ cancion.archivo_mp3.url }}', '{{ cancion.titulo }}', '{{ cancion.artista }}', '{{ cancion.imagen.url }}')"
-                            style="position: absolute; bottom: 0; right: 0;">
-                            <img src="{% static 'images/pla6.png' %}" alt="Play" width="30rem">
-                            </a>
-                        </div>
+    <button id="contraer"></button>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="box-img2">
+                    <div class="texto1" id="nombre-artista-cancion"></div>
+                    <br>
+                    <div id="imagen-container">
+                        <img id="imagen" class="img1" src="{{ imagen_url }}" alt="imagen">
                     </div>
-                    <div class="col-8">
-                        <div class="box-img4">
-                            <div class="texto1" id="nombre-artista-cancion">
-                                <!-- Titulo -->
-                                {{ cancion.titulo }} <br>
-                                <!-- Artista -->
-                                {{ cancion.artista }}
-                            </div>     
-                        </div>  
-                    </div><br><br>
-                    {% endfor %} 
-                </div><br><br><br><br><br>
+                </div>
             </div>
-        </div>    
+            <div class="col-8">
+                <div class="container">
+                    <div class="row align-items-center">
+                        {% for cancion in canciones %}
+                        <div class="col-4">
+                            <div class="box-img3">
+                                <img class="img2" src="{{ cancion.imagen.url }}" alt="imagen">         
+                                <a href="#"
+                                   onclick="reproducir('{{ cancion.archivo_mp3.url }}', '{{ cancion.titulo }}', '{{ cancion.artista }}', '{{ cancion.imagen.url }}')"
+                                   style="position: absolute; bottom: 0; right: 0;">
+                                    <img src="{% static 'images/pla6.png' %}" alt="Play" width="30rem">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="box-img4">
+                                <div class="texto1">
+                                    {{ cancion.titulo }} <br>
+                                    {{ cancion.artista }}
+                                </div>     
+                            </div>  
+                        </div><br><br>
+                        {% endfor %} 
+                    </div><br><br><br><br><br>
+                </div>
+            </div>    
+        </div>
     </div>
-</div>
 <footer id="info-cancion" class="d-flex align-content-center flex-column footer-with-shadow">
     <div class="row">
         <div class="col-1"></div>
@@ -79,41 +78,41 @@
 </footer>
 
 <script>
-// Obtener los parámetros pasados al contexto de la plantilla
-const nombreCancion = "{{ nombre_cancion }}";
-const artista = "{{ artista }}";
-const imagenUrl = "{{ imagen_url }}";
-const audioUrl = "{{ url }}";
+    // Obtener los parámetros pasados al contexto de la plantilla
+    const nombreCancion = "{{ nombre_cancion }}";
+    const artista = "{{ artista }}";
+    const imagenUrl = "{{ imagen_url }}";
+    const audioUrl = "{{ url }}";
 
-// Mostrar la información de la canción en el detalle
-document.getElementById('nombre-artista-cancion').innerHTML = `${artista} <br>${nombreCancion}`;
+    // Mostrar la información de la canción en el detalle
+    document.getElementById('nombre-artista-cancion').innerHTML = `${artista} <br>${nombreCancion}`;
 
-// Crear elemento img para mostrar la imagen
-var imagenElement = document.createElement('img');
-imagenElement.src = imagenUrl;
-imagenElement.alt = 'Carátula de la canción';
+    // Crear elemento img para mostrar la imagen
+    var imagenElement = document.createElement('img');
+    imagenElement.src = imagenUrl;
+    imagenElement.alt = 'Carátula de la canción';
 
-// Añadir la imagen al div correspondiente
-document.getElementById('imagen').appendChild(imagenElement);
+    // Añadir la imagen al div correspondiente
+    document.getElementById('imagen').appendChild(imagenElement);
 
-// Establecer el origen del audio
-document.getElementById('reproductor').src = audioUrl;
+    // Establecer el origen del audio
+    document.getElementById('reproductor').src = audioUrl;
 
-// Botón para contraer y volver al index principal
-document.getElementById('contraer').addEventListener('click', function() {
-    window.location.href = '/';
-});
+    // Botón para contraer y volver al index principal
+    document.getElementById('contraer').addEventListener('click', function() {
+        window.location.href = '/';
+    });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtiene la URL del archivo de audio almacenada en localStorage
-    var audioUrl = localStorage.getItem('currentAudioUrl');
-    if (audioUrl) {
-        // Establece la URL del archivo de audio en el reproductor
-        document.getElementById('audio').src = audioUrl;
-        // Reproduce la canción si se estaba reproduciendo previamente
-        document.getElementById('audio').play();
-    }
-});
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtiene la URL del archivo de audio almacenada en localStorage
+        var audioUrl = localStorage.getItem('currentAudioUrl');
+        if (audioUrl) {
+            // Establece la URL del archivo de audio en el reproductor
+            document.getElementById('audio').src = audioUrl;
+            // Reproduce la canción si se estaba reproduciendo previamente
+            document.getElementById('audio').play();
+        }
+    });
 </script>
 <script src="{% static 'js/btn_reproducir.js' %}"></script>
 </body>
