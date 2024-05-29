@@ -22,19 +22,26 @@
                     <img src="{% static 'images/logo.png' %}" alt="logo" width="90rem">
                     <a class="navbar-brand" href=" ">Hero Sounds</a>
                 </div>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar"
+                        id="inputBusqueda">
+                </form>
+                <div id="resultadoBusqueda" class="container_buscador">
+                    <!--Aqui se muestra el conatiner no hay que poner nada aqui :)) -->
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Tu Musica</a>
+                            <a class="nav-link active" aria-current="page" href="/HeroSound/administrador">Tu Musica</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/HeroSound/cargar_music/">Agregar Musica</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="/HeroSound/base_canciones/" tabindex="-1" aria-disabled="true">Lista</a>
+                            <a class="nav-link " href="/HeroSound/base_canciones/">Lista</a>
                         </li>
                     </ul>
                 </div>
@@ -45,7 +52,7 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ formulario.as_p }}
-            <button type="submit">Agregar Canción</button>
+            <a><button class="btn btn-primary">Agregar Canción</button></a>
         </form>
     </div>
     <br><br>
