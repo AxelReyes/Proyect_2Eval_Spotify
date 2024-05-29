@@ -387,7 +387,7 @@ footer, #reproductor {
 }
 
 
-/* Estilos para el botón sobre la imagen */
+/* Estilos para el botón sobre la imagen
 #imagen {
     position: relative;
     display: inline-block;
@@ -406,4 +406,8 @@ footer, #reproductor {
     border-radius: 1rem;
     padding: 0.5rem;
     cursor: pointer;
+} */
+
+#detail-button{
+    background-color: red;
 }
