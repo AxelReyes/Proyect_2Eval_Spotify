@@ -54,7 +54,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/HeroSound/login" style="padding: 0.5rem; border: none; background-color: blue; color: white;">Iniciar Sesion</a>
+                        <a class="nav-link" href="{% url 'login' %}" style="padding: 0.5rem; border: none; background-color: blue; color: white;">Iniciar Sesion</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -83,7 +83,7 @@
                     <a href="#"
                         onclick="reproducir('{{ cancion_seleccionada.archivo_mp3.url }}', '{{ cancion_seleccionada.titulo }}', '{{ cancion_seleccionada.artista }}', '{{ cancion_seleccionada.imagen.url }}')"
                         style="position: absolute; bottom: 0; right: 0;">
-                        <img src="{% static 'images/play3.png' %}" alt="Play" width="70px">
+                        <img src="{% static 'images/Play0.png' %}" alt="Play" width="70px">
                     </a>
                 </div>
             </div>

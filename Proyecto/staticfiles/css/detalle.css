@@ -61,12 +61,12 @@ body {
 }
 
 footer {
-    position: relative;
+    position: fixed; /* Mantén el footer fijo */
     bottom: 0;
     width: 100%;
     background-color: bisque; 
     padding: 10px; 
-    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); 
+    z-index: 100; /* Asegura que el footer esté por encima de otros elementos */
 }
 
 footer, #reproductor {
@@ -228,7 +228,7 @@ footer, #reproductor {
 #play-pause {
     width: 1.875rem;
     height: 1.875rem;
-    background: url('../images/Play1.png') no-repeat center center;
+    background: url('../images/play2.png') no-repeat center center;
     background-size: contain;
     border: none;
     cursor: pointer;
@@ -263,6 +263,7 @@ footer, #reproductor {
 
 #volumen-bar {
     width: 6.25rem; /* Adjust width as needed */
+    -webkit-appearance: none;
     background: #ddd;
     height: 0.5rem;
     border-radius: 0.313rem;
@@ -296,6 +297,13 @@ footer, #reproductor {
     background-size: contain;
 }
 
+#contraer {
+    width: 1.875rem;
+    height: 1.875rem;
+    background: url('../images/contraer.png') no-repeat center center; /* Cambia 'volumen.png' por la ruta de tu imagen */
+    background-size: contain;
+}
+
 .col-7-f {
     width: 57%;
 }
@@ -326,16 +334,14 @@ footer, #reproductor {
 
 .img1 {
     border-radius: 10%;
-    width: 28rem;
+    width: 32rem;
 }
 
-.box-img2{
-    position: relative;
-    width: 28rem;
-}
-
-.texto1{
-    text-align: center;
+.box-img2 {
+    position: fixed;
+    top: 10%; /* Ajusta según tu preferencia */
+    left: 15rem;
+    border-radius: 10px;
 }
 
 .texto2{
@@ -344,72 +350,89 @@ footer, #reproductor {
 
 .box-img3{
     position: relative;
-    width: 6rem;
+    width: 8rem;
+    margin-left: 20rem;
 }
 
 .img2 {
     border-radius: 10%;
-    width: 6rem;
+    width: 8rem;
 }
 
-.box-img4{
-    width: 120rem;
+/* ffffff */
+.col-auto {
+    flex: 0 0 auto;
 }
 
-/* Estilos para el botón sobre la imagen */
-#imagen {
+.col {
+    flex: 1 1 auto;
+}
+
+.col-8{
+    margin-top: 0.8rem;
+}
+
+.col-4{
+    margin-top: 0.8rem;
+}
+
+.box-img4 {
+    width: auto; /* Ajusta según tus necesidades */
     position: relative;
-    display: inline-block;
+    margin-left: 14rem;
 }
-#imagen img {
-    width: 6.5rem;
-    border-radius: 1rem;
+
+.texto1 {
+    text-align: center; /* Puedes ajustar esto a 'left' o 'right' si prefieres otro alineamiento */
+    font-size: 1.5rem;
 }
-#close-button {
-    position: absolute;
-    top: 0;
-    left: 5.5rem;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-    padding: 0.5rem;
-    cursor: pointer;
+
+.text1 {
+    font-size: 1rem;
+}
+
+.contrae{
+    position: fixed;
 }
 
 /* CSS para moviles */
 @media (max-width: 576px) {
     /* Para pantallas menores de 1200px (extra grandes) */
-    .col-md-6 {
-        flex: 0 0 auto; /* 3 columnas */
-        max-width: 50%;
-    }
     
-    .titulo {
-        font-size: 6em;
-        color: #ffffff;
+    .box-img2 {
+        top: 25%;
+        left: 0.8rem;
+        border-radius: 10px;
     }
 
-    .box-img{
+    .img1 {
+        border-radius: 10%;
+        width: 20rem;
+    }
+
+    .img2 {
+        border-radius: 10%;
+        width: 7rem;
+    }
+
+    .box-img3 {
         position: relative;
-        width: 26em;
-        height: 26.5em;
-        
+        width: 7rem;
+        margin-left: 20.7rem;
     }
 
-    .img{
-        margin-left: 4rem;
-    }
-    
-    .texto{
-        font-size: 1.1em;
-        text-align: center;
-        color: #ffffff;
-       margin-left: 4rem;
-    }
-    
     .col-3-f {
         width: 20%;
+    }
+
+    .col-4 {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .col-8 {
+        width: 100%;
+        text-align: center;
     }
 
     .col-1{
@@ -422,6 +445,7 @@ footer, #reproductor {
         line-height: 1.5rem;
         text-align: center;
         margin-top: 1rem;
+        height: 9rem;
     }
 
     .player-container {
@@ -434,6 +458,7 @@ footer, #reproductor {
 
     #volumen-bar {
         width: 6.25rem;
+        -webkit-appearance: none;
         background: #ddd;
         height: 0.5rem;
         border-radius: 0.313rem;
@@ -441,20 +466,17 @@ footer, #reproductor {
         margin-left: 3.5rem;
     }
 
-    .container_buscador {
-        width: 25rem;
-        height: auto;
-        display: block;
-        background-color: white;
-        padding: 0.625rem;
-        border: 1px solid var(--color-blanco);
-        position: fixed;
-        top: 7.5%;
-        left: 0;
-        right: 0;
-        margin-left: 0.7rem;
-        margin-top: 4.5rem;
-        border-radius: 0.625rem;
-        z-index: 9999;
+    .box-img3, .box-img4 {
+        margin-bottom: 1rem;
+        margin-right: -1rem;
+    }
+
+    .texto1{
+        font-size: 1.5rem;
+    }
+
+    .text1 {
+        font-size: 1rem;
+        margin-left: 6rem;
     }
 }
