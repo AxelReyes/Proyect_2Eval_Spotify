@@ -39,6 +39,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/" style="padding: 0.5rem; width: 7rem;">Tu Musica</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'registro' %}" style="padding: 0.5rem; width: 7rem;">Registrarse</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.5rem; width: 11.5rem;">

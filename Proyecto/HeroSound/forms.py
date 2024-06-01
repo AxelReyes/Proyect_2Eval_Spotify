@@ -27,7 +27,10 @@ class RegistroForm(forms.ModelForm):
         # Condición para mostrar las opciones dependiendo del tipo de usuario
         if tipo_usuario == 'administrador':
             # Opciones para el tipo de usuario administrador
-            self.fields['tipo_usuario'] = forms.ChoiceField(choices=(('user', 'User'), ('administrador', 'Administrador')))
+            self.fields['tipo_usuario'] = forms.ChoiceField(choices=(
+                ('administrador', 'Administrador'),
+                ('user', 'User'),
+            ))
         else:
             # Ocultar el campo tipo_usuario y establecer 'user' como valor predeterminado
             self.fields['tipo_usuario'] = forms.CharField(

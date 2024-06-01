@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from HeroSound.models import Cancion, Perfil
 from .forms import FormularioCancion, RegistroForm, CustomAuthenticationForm
@@ -74,28 +75,33 @@ def registro(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            # Establecer la contraseña
-            user.set_password(form.cleaned_data['password'])
-            user.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            tipo_usuario = form.cleaned_data.get('tipo_usuario')
             
-            # Crear el perfil asociado al usuario registrado
-            tipo_usuario = form.cleaned_data['tipo_usuario']
-            perfil = Perfil.objects.create(user=user, tipo_usuario=tipo_usuario)
+            # Crear un nuevo usuario
+            user = User.objects.create_user(username=username, password=password)
             
-            # Iniciar sesión con el usuario registrado
+            # Crear un perfil asociado al usuario
+            Perfil.objects.create(user=user, tipo_usuario=tipo_usuario)
+                
+            # Iniciar sesión con el nuevo usuario
             login(request, user)
-            
-            # Redirigir a la página principal o a donde desees
             return redirect('/')
     else:
-        # Obtener el tipo de usuario actual del perfil
-        perfil_usuario = get_object_or_404(Perfil, user=request.user)
-        tipo_usuario_actual = perfil_usuario.tipo_usuario if perfil_usuario else 'user'
-        
-        # Inicializar el formulario con el tipo de usuario actual
-        form = RegistroForm(initial={'tipo_usuario': tipo_usuario_actual})
+        # Si el usuario no está autenticado, inicializar el formulario sin ningún tipo de usuario
+        if not request.user.is_authenticated:
+            form = RegistroForm()
+        else:
+            # Obtener el tipo de usuario actual del perfil
+            perfil_usuario = get_object_or_404(Perfil, user=request.user)
+            tipo_usuario_actual = perfil_usuario.tipo_usuario if perfil_usuario else 'user'
+            
+            # Inicializar el formulario con el tipo de usuario actual
+            form = RegistroForm(initial={'tipo_usuario': tipo_usuario_actual})
     return render(request, 'registration/registro.html', {'form': form})
+
+
 
 def login_view(request):
     if request.method == 'POST':
