@@ -263,7 +263,6 @@ footer, #reproductor {
 
 #volumen-bar {
     width: 6.25rem; /* Adjust width as needed */
-    -webkit-appearance: none;
     background: #ddd;
     height: 0.5rem;
     border-radius: 0.313rem;
@@ -458,7 +457,6 @@ footer, #reproductor {
 
     #volumen-bar {
         width: 6.25rem;
-        -webkit-appearance: none;
         background: #ddd;
         height: 0.5rem;
         border-radius: 0.313rem;
