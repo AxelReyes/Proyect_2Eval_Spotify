@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/footers.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/width.css' %}" />
     <link rel="icon" href="{% static 'images/logo.png' %}">
     <title>HeroSound</title>
 </head>
@@ -22,7 +22,7 @@
 
             <div class="navbar-brand-container">
                 <img src="{% static 'images/logo.png' %}" alt="logo" width="90rem">
-                <a class="navbar-brand" href=" ">Hero Sounds</a>
+                <a class="navbar-brand" href="{% url 'administrador' %}">Hero Sounds</a>
             </div>
     
             <form class="d-flex" role="search">
@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/HeroSound/administrador" style="padding: 0.5rem; width: 7rem;">Tu Musica</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'administrador' %}" style="padding: 0.5rem; width: 7rem;">Tu Musica</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/HeroSound/cargar_music/" style="padding: 0.5rem; width: 9rem;">Agregar Musica</a>
@@ -75,10 +75,10 @@
     <br><br>
     <div class="container">
         <div class="row">
-            {% with col_class="col-3" %}
+            {% with col_class="col-lg-3" %}
             {% for cancion in canciones %}
             <div class="{{ col_class }}">
-                <div class="box-img" style="position: relative;">
+                <div class="box-img">
                     <div class="texto">
                         <!-- Titulo -->
                         {{ cancion.titulo }} <br>
@@ -90,27 +90,27 @@
                     <a href="#"
                         onclick="reproducir('{{ cancion.archivo_mp3.url }}', '{{ cancion.titulo }}', '{{ cancion.artista }}', '{{ cancion.imagen.url }}')"
                         style="position: absolute; bottom: 0; right: 0;">
-                        <img src="{% static 'images/pla6.png' %}" alt="Play" width="70px">
+                        <img src="{% static 'images/play3.png' %}" alt="Play" width="70px">
                     </a>
                 
                 </div>
             </div>
             {% if forloop.counter|divisibleby:4 %}
-            {% if col_class == "col-3" %}
-            {% with col_class="col-6" %}
+            {% if col_class == "col-lg-3" %}
+            {% with col_class="col-lg-6" %}
             {% endwith %}
-            {% elif col_class == "col-6" %}
-            {% with col_class="col-9" %}
+            {% elif col_class == "col-lg-6" %}
+            {% with col_class="col-lg-9" %}
             {% endwith %}
             {% else %}
-            {% with col_class="col-3" %}
+            {% with col_class="col-lg-3" %}
             {% endwith %}
             {% endif %}
             {% endif %}
             {% endfor %}
             {% endwith %}
         </div>
-    </div>
+    </div>   
 
     <footer class="mi-footer">
     <div class="container py-5"> <!-- Cambiamos py-4 por py-5 para aumentar la altura -->

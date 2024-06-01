@@ -9,7 +9,7 @@ from django.urls import reverse
 
 def start_music(request):
     # Obtén todas las canciones guardadas
-    canciones = Cancion.objects.all()
+    canciones = Cancion.objects.all().order_by('titulo')  # Ordena las canciones por el título
 
     # Verifica si se está realizando una búsqueda
     if 'q' in request.GET:
@@ -36,22 +36,24 @@ def cargar_music(request):
         formulario = FormularioCancion(request.POST, request.FILES)
         if formulario.is_valid():
             formulario.save()
-            return redirect('/')
+            return redirect('administrador')  # Use the URL pattern name
     else:
         formulario = FormularioCancion()
     return render(request, 'HeroSound/upload_music.html', {'formulario': formulario})
 
 @login_required
 def base(request):
-    canciones = Cancion.objects.all()
+    canciones = Cancion.objects.all().order_by('titulo')  # Ordena las canciones por el título
     return render(request, 'HeroSound/base_canciones.html', {'canciones': canciones})
 
 def detalle_cancion(request):
-    canciones = Cancion.objects.all()
-    nombre_cancion = request.GET.get('nombreCancion', '')
-    artista = request.GET.get('artista', '')
-    imagen_url = request.GET.get('imagenUrl', '')
-    audio_url = request.GET.get('audioUrl', '')
+    canciones = Cancion.objects.all().order_by('titulo')  # Ordena las canciones por el título
+
+    # Si hay parámetros GET, usa esos valores, de lo contrario usa la primera canción en la lista
+    nombre_cancion = request.GET.get('nombreCancion', canciones.first().titulo if canciones.exists() else '')
+    artista = request.GET.get('artista', canciones.first().artista if canciones.exists() else '')
+    imagen_url = request.GET.get('imagenUrl', canciones.first().imagen.url if canciones.exists() else '')
+    audio_url = request.GET.get('audioUrl', canciones.first().archivo_mp3.url if canciones.exists() else '')
 
     context = {
         'nombre_cancion': nombre_cancion,
@@ -63,7 +65,7 @@ def detalle_cancion(request):
     return render(request, 'HeroSound/detalle_cancion.html', context)
 
 def show_administrador(request):
-    canciones = Cancion.objects.all()
+    canciones = Cancion.objects.all().order_by('titulo')  # Ordena las canciones por el título
 
     return render(request, 'HeroSound/administrador.html', {'canciones': canciones})
 
@@ -107,7 +109,7 @@ def login_view(request):
                 # Asegurarse de que el perfil exista
                 perfil, created = Perfil.objects.get_or_create(user=user, defaults={'tipo_usuario': 'user'})
                 if perfil.tipo_usuario == 'administrador':
-                    return redirect('HeroSound/administrador')
+                    return redirect('administrador')  # Use the URL pattern name
                 elif perfil.tipo_usuario == 'user':
                     return redirect('/')
     else:

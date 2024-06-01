@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +9,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/foooter.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/detalle.css' %}" />
     <link rel="icon" href="{% static 'images/logo.png' %}">
     <title>HeroSound</title>
 </head>
 <body>
-    <button id="contraer"></button>
+    <button id="contraer" class="contrae"></button>
     <div class="container">
         <div class="row">
             <div class="col-4">
                 <div class="box-img2">
-                    <div class="texto1" id="nombre-artista-cancion"></div>
+                    <div class="texto1" id="nombre-artista-cancion">{{ artista }} <br>{{ nombre_cancion }}</div>
                     <br>
                     <div id="imagen-container">
                         <img id="imagen" class="img1" src="{{ imagen_url }}" alt="imagen">
@@ -29,7 +28,8 @@
             </div>
             <div class="col-8">
                 <div class="container">
-                    <div class="row align-items-center">
+                    <div class="row align-items-center detalles">
+                        <!-- Itera sobre todas las canciones ordenadas alfabéticamente por título -->
                         {% for cancion in canciones %}
                         <div class="col-4">
                             <div class="box-img3">
@@ -37,19 +37,19 @@
                                 <a href="#"
                                    onclick="reproducir('{{ cancion.archivo_mp3.url }}', '{{ cancion.titulo }}', '{{ cancion.artista }}', '{{ cancion.imagen.url }}')"
                                    style="position: absolute; bottom: 0; right: 0;">
-                                    <img src="{% static 'images/pla6.png' %}" alt="Play" width="30rem">
+                                    <img src="{% static 'images/play3.png' %}" alt="Play" width="30rem">
                                 </a>
                             </div>
                         </div>
                         <div class="col-8">
                             <div class="box-img4">
-                                <div class="texto1">
+                                <div class="texto1 text1">
                                     {{ cancion.titulo }} <br>
                                     {{ cancion.artista }}
                                 </div>     
                             </div>  
                         </div><br><br>
-                        {% endfor %} 
+                        {% endfor %}  <!-- Fin del bucle -->
                     </div><br><br><br><br><br>
                 </div>
             </div>    
@@ -60,7 +60,7 @@
         <div class="col-1"></div>
         <div class="col-2-h"></div>
         <div class="col-7-f">
-            <audio id="reproductor" class="audio-container"></audio>
+            <audio id="reproductor" class="audio-container" src="{{ url }}"></audio>
             <div class="player-container">
                 <button id="play-pause"></button>
                 <div class="seek-container">
@@ -78,42 +78,101 @@
 </footer>
 
 <script>
-    // Obtener los parámetros pasados al contexto de la plantilla
-    const nombreCancion = "{{ nombre_cancion }}";
-    const artista = "{{ artista }}";
-    const imagenUrl = "{{ imagen_url }}";
-    const audioUrl = "{{ url }}";
+    function reproducir(url, nombreCancion, artista, imagenUrl) {
+        var audio = document.getElementById('reproductor');
+        var playPauseButton = document.getElementById('play-pause');
+        var imagenElement = document.getElementById('imagen');
+        var nombreArtistaCancionDiv = document.getElementById('nombre-artista-cancion');
 
-    // Mostrar la información de la canción en el detalle
-    document.getElementById('nombre-artista-cancion').innerHTML = `${artista} <br>${nombreCancion}`;
+        // Detener la canción actual si está reproduciendo
+        audio.pause();
+        audio.currentTime = 0;
 
-    // Crear elemento img para mostrar la imagen
-    var imagenElement = document.createElement('img');
-    imagenElement.src = imagenUrl;
-    imagenElement.alt = 'Carátula de la canción';
+        // Cargar y reproducir la nueva canción
+        audio.src = url;
+        audio.play();
 
-    // Añadir la imagen al div correspondiente
-    document.getElementById('imagen').appendChild(imagenElement);
+        // Mostrar información de la nueva canción en el detalle
+        nombreArtistaCancionDiv.innerHTML = `${artista} <br>${nombreCancion}`;
 
-    // Establecer el origen del audio
-    document.getElementById('reproductor').src = audioUrl;
+        // Actualizar la imagen
+        imagenElement.src = imagenUrl;
+
+        // Cambia el estado del botón a "pause"
+        playPauseButton.classList.add('pause');
+
+        // Actualiza el botón de play/pause para que pause el audio si se hace clic
+        playPauseButton.removeEventListener('click', togglePlayPause);
+        playPauseButton.addEventListener('click', togglePlayPause);
+    }
 
     // Botón para contraer y volver al index principal
     document.getElementById('contraer').addEventListener('click', function() {
         window.location.href = '/';
     });
+    
+    // Función para manejar el cambio de play a pause y viceversa
+    function togglePlayPause() {
+        var audio = document.getElementById('reproductor');
+        var playPauseButton = document.getElementById('play-pause');
+
+        if (audio.paused) {
+            audio.play();
+            playPauseButton.classList.add('pause');
+        } else {
+            audio.pause();
+            playPauseButton.classList.remove('pause');
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Obtiene la URL del archivo de audio almacenada en localStorage
-        var audioUrl = localStorage.getItem('currentAudioUrl');
-        if (audioUrl) {
-            // Establece la URL del archivo de audio en el reproductor
-            document.getElementById('audio').src = audioUrl;
-            // Reproduce la canción si se estaba reproduciendo previamente
-            document.getElementById('audio').play();
+        var audio = document.getElementById('reproductor');
+        var playPauseButton = document.getElementById('play-pause');
+        var seekBar = document.getElementById('seek-bar');
+        var currentTimeDisplay = document.getElementById('current-time');
+        var durationTimeDisplay = document.getElementById('duration-time');
+        var volumenBar = document.getElementById('volumen-bar');
+
+        function formatTime(seconds) {
+            var minutes = Math.floor(seconds / 60);
+            var seconds = Math.floor(seconds % 60);
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+            return minutes + ':' + seconds;
         }
+
+        // Play/Pause button functionality
+        playPauseButton.addEventListener('click', togglePlayPause);
+
+        // Seek bar functionality
+        seekBar.addEventListener('input', function() {
+            var seekTime = audio.duration * (seekBar.value / 100);
+            audio.currentTime = seekTime;
+        });
+
+        // Update the seek bar and time display as the audio plays
+        audio.addEventListener('timeupdate', function() {
+            var value = (audio.currentTime / audio.duration) * 100;
+            seekBar.value = value;
+
+            // Update the custom property to change the seek bar color
+            seekBar.style.setProperty('--seek-bar-value', value + '%');
+
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+            durationTimeDisplay.textContent = formatTime(audio.duration);
+        });
+
+        // Update duration time once metadata is loaded
+        audio.addEventListener('loadedmetadata', function() {
+            durationTimeDisplay.textContent = formatTime(audio.duration);
+        });
+
+        // Volume control functionality
+        volumenBar.addEventListener('input', function() {
+            audio.volume = volumenBar.value;
+        });
     });
 </script>
-<script src="{% static 'js/btn_reproducir.js' %}"></script>
 </body>
 </html>

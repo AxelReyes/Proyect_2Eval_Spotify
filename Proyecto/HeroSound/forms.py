@@ -29,8 +29,11 @@ class RegistroForm(forms.ModelForm):
             # Opciones para el tipo de usuario administrador
             self.fields['tipo_usuario'] = forms.ChoiceField(choices=(('user', 'User'), ('administrador', 'Administrador')))
         else:
-            # Opciones para el tipo de usuario normal
-            self.fields['tipo_usuario'] = forms.ChoiceField(choices=(('user', 'User'),))
+            # Ocultar el campo tipo_usuario y establecer 'user' como valor predeterminado
+            self.fields['tipo_usuario'] = forms.CharField(
+                initial='user',
+                widget=forms.HiddenInput()
+            )
 
     class Meta:
         model = Perfil

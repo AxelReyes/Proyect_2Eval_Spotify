@@ -21,25 +21,33 @@ function reproducir(url, nombreCancion, artista, imagenUrl) {
     imagenElement.src = imagenUrl;
     imagenElement.alt = 'Carátula de la canción';
 
-    // Crear botón de detalle
-    var detailButton = document.createElement('button');
-    detailButton.className = 'button_detail';
-    detailButton.style.backgroundColor = '#0f6db9af'; 
-    detailButton.style.width = '1rem';
-    detailButton.style.height = '1rem';
-    detailButton.style.borderTopRightRadius = '1rem';
-    detailButton.style.position = 'fixed';
-    detailButton.style.marginLeft = '5.5rem';
+    // Crear el botón de detalle
+    var detailButton = document.createElement('a');
+    detailButton.innerHTML = `
+        <img class="flecha" src="https://cdn-icons-png.flaticon.com/512/5344/5344570.png" alt="expandir" style="position: absolute; top: 4.8rem; left: 5rem; width: 2rem;">
+    `;
     detailButton.onclick = function() {
         mostrarDetalle(nombreCancion, artista, imagenUrl, url);
     };
 
-
     // Añadir la imagen y el botón al div de la imagen
     imagenDiv.innerHTML = '';
     imagenDiv.appendChild(detailButton);
+    // imagenDiv.appendChild(detailButton);
     imagenDiv.appendChild(imagenElement);
 
+    // // Crear botón de detalle
+    // var detailButton = document.createElement('button');
+    // detailButton.className = 'button_detail';
+    // detailButton.style.backgroundColor = '#0f6db9af'; 
+    // detailButton.style.width = '1rem';
+    // detailButton.style.height = '1rem';
+    // detailButton.style.borderTopRightRadius = '1rem';
+    // detailButton.style.position = 'fixed';
+    // detailButton.style.marginLeft = '5.5rem';
+    // detailButton.onclick = function() {
+    //     mostrarDetalle(nombreCancion, artista, imagenUrl, url);
+    // };
 
     // Cambia el estado del botón a "pause"
     playPauseButton.classList.add('pause');
