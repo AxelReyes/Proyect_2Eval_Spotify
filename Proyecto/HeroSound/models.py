@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import User
 
 class Cancion(models.Model):
     titulo = models.CharField(max_length=100)
@@ -21,3 +21,10 @@ class Perfil(models.Model):
     
     def __str__(self):
         return f'{self.user.username} - {self.get_tipo_usuario_display()}'
+
+class Playlist(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    canciones = models.ManyToManyField(Cancion)
+    
+    def __str__(self):
+        return f'Playlist de {self.user.username}'

@@ -1,11 +1,11 @@
 from django.urls import path
 from HeroSound import views
 from .views import start_music, cargar_music, busqueda, detalle_cancion, login_view
-from .views import logout_view, registro, show_administrador, eliminar_cancion
+from .views import logout_view, registro, show_administrador, eliminar_cancion, agregar_a_playlist, ver_playlist, eliminar_cancion_playlist
 
 
 urlpatterns = [
-    path('/', views.start_music),
+    path('', views.start_music, name='start_music'),
     path('base_canciones/', views.base, name='basecancion'),
     path('cargar_music/', views.cargar_music, name='cargar_music'),
     path('busqueda/', views.busqueda, name='busqueda'),  
@@ -16,4 +16,7 @@ urlpatterns = [
     path('administrador/', views.show_administrador, name='administrador'),
     path('editar_cancion/<int:cancion_id>/', views.editar_cancion, name='editar_cancion'),
     path('eliminar_cancion/<int:cancion_id>/', views.eliminar_cancion, name='eliminar_cancion'),
+    path('ver_playlist/', views.ver_playlist, name='ver_playlist'),
+    path('agregar_a_playlist/', views.agregar_a_playlist, name='agregar_a_playlist'),
+    path('eliminar_cancion_playlist/', views.eliminar_cancion_playlist, name='eliminar_cancion_playlist'),
 ]

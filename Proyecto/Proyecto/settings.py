@@ -38,6 +38,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'miprimermusic.whiteplant-176260c4.eastus2.azurecontainerapps.io',  # Agrega tu dominio aquí
+    '192.168.1.101',  # Direccion de mi laptop
     'localhost',  # Incluye localhost si pruebas localmente
     '127.0.0.1'   # Incluye la IP local si pruebas localmente
 ]

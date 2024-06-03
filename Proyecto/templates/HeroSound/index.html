@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/width.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/widths.css' %}" />
     <link rel="icon" href="{% static 'images/logo.png' %}">
     <title>HeroSound</title>
 </head>
@@ -43,13 +43,13 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'registro' %}" style="padding: 0.5rem; width: 7rem;">Registrarse</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.5rem; width: 11.5rem;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'ver_playlist' %}" style="padding: 0.5rem; width: 5rem;">Playlist</a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'registro' %}" style="padding: 0.5rem; width: 11.5rem;">
                             Bienvenido, {{ user.username }}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a></li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}" style="padding: 0.5rem; border: none; background-color: red; color: white;">Cerrar Sesión</a>
@@ -84,12 +84,16 @@
                     </div>
                     <br>
                     <img class="img" src="{{ cancion.imagen.url }}" alt="imagen" width="330px">
+                    <!-- Botón para añadir a la playlist -->
+                    <a href="#" onclick="agregarPlaylist('{{ cancion.archivo_mp3.url }}', '{{ cancion.titulo }}', '{{ cancion.artista }}', '{{ cancion.imagen.url }}')" 
+                        style="position: absolute; bottom: 20rem; right: 20rem;">
+                        <img src="{% static 'images/agregar_blue.png' %}" alt="Playlist" width="45px">
+                    </a>                                
                     <a href="#"
                         onclick="reproducir('{{ cancion.archivo_mp3.url }}', '{{ cancion.titulo }}', '{{ cancion.artista }}', '{{ cancion.imagen.url }}')"
                         style="position: absolute; bottom: 0; right: 0;">
-                        <img src="{% static 'images/Play0.png' %}" alt="Play" width="70px">
+                        <img src="{% static 'images/pla6.png' %}" alt="Play" width="70px">
                     </a>
-                
                 </div>
             </div>
             {% if forloop.counter|divisibleby:4 %}
@@ -107,7 +111,7 @@
             {% endfor %}
             {% endwith %}
         </div>
-    </div>    
+    </div> 
 
     <footer class="mi-footer">
     <div class="container py-5"> <!-- Cambiamos py-4 por py-5 para aumentar la altura -->
@@ -146,10 +150,7 @@
     
 <footer id="info-cancion" class="d-flex align-content-center flex-column footer-with-shadow">
     <div class="row">
-        <div id="imagen" class=" img col-1">
-            <!-- <a href="#" onclick="mostrarDetalle('{{ nombreCancion }}', '{{ artista }}', '{{ imagenUrl }}', '{{ url }}')" 
-            style="position: absolute; bottom: 0; right: 0;">
-            <img src="{% static 'images/expandir.png' %}" alt="expandir" width="70px"></a> -->
+        <div id="imagen" class=" img-f col-1">
         </div>
         <div id="nombre-artista-cancion" class="col-3-f centered-text">Reproduciendo... </div>
         <div class="col-7-f">
@@ -172,6 +173,42 @@
 
 <script src="{% static 'js/btn_reproducir.js' %}"></script>
 <script src="{% static 'js/buscador.js' %}"></script>
-</body>
+<!-- Script para manejar la notificación -->
+<script>
+    const agregarPlaylistUrl = "{% url 'agregar_a_playlist' %}";
 
+    function agregarPlaylist(url, nombreCancion, artista, imagenUrl) {
+        // Construye un objeto con los datos de la canción
+        const cancion = {
+            url: url,
+            nombreCancion: nombreCancion,
+            artista: artista,
+            imagenUrl: imagenUrl
+        };
+
+        // Realiza una solicitud AJAX para enviar los datos al backend
+        fetch(agregarPlaylistUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}' // Asegúrate de incluir el token CSRF
+            },
+            body: JSON.stringify(cancion)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Canción agregada a la playlist');
+                // Actualiza la vista actual para reflejar los cambios
+                window.location.reload();
+            } else {
+                alert('Hubo un problema al agregar la canción a la playlist');
+            }
+        })
+        .catch(error => {
+            console.error('Error al agregar la canción:', error);
+            alert('Hubo un problema al agregar la canción a la playlist');
+        });
+    }
+</script>
+</body>
 </html>

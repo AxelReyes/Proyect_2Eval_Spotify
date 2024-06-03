@@ -3,10 +3,12 @@ from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from HeroSound.models import Cancion, Perfil
+from HeroSound.models import Cancion, Perfil, Playlist
 from .forms import FormularioCancion, RegistroForm, CustomAuthenticationForm
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from django.core.serializers import serialize
+import json
 
 def start_music(request):
     # Obtén todas las canciones guardadas
@@ -145,3 +147,78 @@ def eliminar_cancion(request, cancion_id):
     cancion = get_object_or_404(Cancion, id=cancion_id)
     cancion.delete()
     return redirect('basecancion')
+
+@login_required
+def agregar_a_playlist(request):
+    if request.method == 'POST':
+        # Obtener los datos JSON de la solicitud
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': str(e)}, status=400)
+
+        # Obtener el usuario actual
+        usuario = request.user
+
+        # Obtener o crear la playlist del usuario
+        playlist, creado = Playlist.objects.get_or_create(user=usuario)
+
+        # Obtener la información de la canción
+        url = data.get('url')
+        nombre_cancion = data.get('nombreCancion')
+        artista = data.get('artista')
+        imagen_url = data.get('imagenUrl')
+
+        # Buscar si la canción ya existe en la base de datos
+        cancion_existente = Cancion.objects.filter(titulo=nombre_cancion, artista=artista).first()
+
+        if cancion_existente:
+            # La canción ya existe, simplemente agrégala a la playlist
+            playlist.canciones.add(cancion_existente)
+        else:
+            # La canción no existe, crea una nueva instancia de Cancion y agrégala a la playlist
+            nueva_cancion = Cancion.objects.create(
+                titulo=nombre_cancion,
+                artista=artista,
+                archivo_mp3=url,
+                imagen=imagen_url
+            )
+            playlist.canciones.add(nueva_cancion)
+
+        # Retorna una respuesta JSON indicando que la canción fue agregada exitosamente a la playlist
+        return JsonResponse({'mensaje': 'Canción agregada exitosamente a la playlist'})
+
+    # Si la solicitud no es de tipo POST, retornar un error
+    return JsonResponse({'error': 'Se esperaba una solicitud de tipo POST'}, status=405)
+
+@login_required
+def ver_playlist(request):
+    # Obtén la playlist del usuario actual
+    playlist_usuario = Playlist.objects.filter(user=request.user).first()
+
+    # Si el usuario no tiene una playlist, crea una vacía
+    if not playlist_usuario:
+        playlist_usuario = Playlist.objects.create(user=request.user)
+
+    # Obtén las canciones de la playlist del usuario
+    canciones_playlist = playlist_usuario.canciones.all()
+
+    # Renderiza la plantilla con las canciones en el contexto
+    return render(request, 'HeroSound/ver_playlist.html', {'canciones_playlist': canciones_playlist})
+
+@login_required
+def eliminar_cancion_playlist(request):
+    if request.method == 'POST':
+        # Obtener el ID de la canción a eliminar
+        cancion_id = request.POST.get('cancion_id')
+        
+        # Obtener la playlist del usuario actual
+        playlist_usuario = Playlist.objects.get(user=request.user)
+        
+        # Eliminar la canción de la playlist
+        playlist_usuario.canciones.remove(cancion_id)
+        
+        # Redirigir de vuelta a la página de la lista de reproducción
+        return redirect('ver_playlist')
+    # Si la solicitud no es de tipo POST, redirigir a alguna página de error
+    return redirect('ver_playlist')  # Podrías redirigir a una página de error 405, por ejemplo

@@ -277,10 +277,23 @@ form {
     font-family: 'Franklin Gothic Demi'; 
 }
 
-.btn_cocinero {
-    padding: 1rem 2rem; /* Asegura un buen tamaño de botón */
-    border-radius: 1.5rem;
-    color: white;
-    background-image: url('https://i.gifer.com/origin/65/65c6ed96a40bf5e00d4ac5a7a36845da_w200.gif'); 
-    margin-top: 1.5rem; /* Añade espacio entre el botón y los campos del formulario */
+/* CSS para moviles */
+@media (max-width: 576px) {
+    /* Para pantallas menores de 1200px (extra grandes) */
+    
+    .titulo1 {
+        font-size: 4rem;
+        color: #ffffff;
+    }
+
+    form {
+        padding: 5rem;
+        border: 1px solid #ddd;
+        border-radius: 1.5rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Esto centrará los elementos hijos (incluido el botón) */
+    }
 }
